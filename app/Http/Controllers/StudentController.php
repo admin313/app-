@@ -94,14 +94,13 @@ class StudentController extends BaseController
     public function getStudents(Request $request)
     {
         if ($request->ajax()) {
-            $data = Student::latest();
+            $data = Student::latest()->get();
 //            return $data;
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="' . route("students.edit", ['student' => $row->id]) . '"data-original-title="Detail" class="btn btn-primary mr-1 btn-sm detailProduct">ویرایش<span class="fas fa-eye"></span></a><a href="' . route("students.destory", ['student' => $row->id]) . '"data-original-title="Detail" class="btn btn-danger mr-1 btn-sm deleteStudent">حذف<span class="fas fa-eye"></span></a>';
-                    //'<a href="'.route("students.edit",['student'=>$row->id]).'"data-original-title="Detail" class="btn btn-primary mr-1 btn-sm detailProduct"><span class="fas fa-eye"></span></a><a href="javascript:void(0)" id="' + $row.id +'" class="showStudent ml-2 btn btn-primary btn-sm">نمایش</a> <a href="" id="' + $row.id +'" class="deleteStudent btn btn-danger btn-sm">حذف</a>';
-
+                    $actionBtn = '<a href="' . route("students.edit", ['student' => $row->id]) . '"data-original-title="Detail" class="btn btn-primary mr-1 btn-sm detailProduct">ویرایش<span class="fas fa-eye"></span></a><a href="' . route("article.create", ['student' => $row->id]) . '"data-original-title="Detail" class="btn btn-primary mr-1 btn-sm saveArticle">ثبت مقاله<span class="fas fa-eye"></span></a> <a href="' . route("students.destory", ['student' => $row->id]) . '"data-original-title="Detail" class="btn btn-danger mr-1 btn-sm deleteStudent">حذف<span class="fas fa-eye"></span></a>';
+//
 
                     //`<input href="javascript:void(0)" type="checkbox"  id="' + $row.id +'" onclick="editClick(this)">Edit</button>`;
 
