@@ -18,7 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href=/panel/asset/css/jquery-confirm.css">
+
 </head>
 <body>
     <div id="app">
@@ -40,6 +40,22 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
+                        @if (Route::has('login'))
+                            <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                                @auth
+                                    <a href="{{ url('/home') }}" class="  btn  text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
+                                    <a href="{{ url('/students') }}" class="  btn  text-sm text-gray-700 dark:text-gray-500 underline">student</a>
+                                    <a href="{{ url('/users') }}" class="  btn  text-sm text-gray-700 dark:text-gray-500 underline">users</a>
+                                    <a href="{{ url('/category') }}" class="  btn  text-sm text-gray-700 dark:text-gray-500 underline">category</a>users
+                                @else
+                                    <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+
+                                    @if (Route::has('register'))
+                                        <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                                    @endif
+                                @endauth
+                            </div>
+                        @endif
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">

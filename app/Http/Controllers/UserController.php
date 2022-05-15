@@ -28,7 +28,7 @@ class UserController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="javascript:void(0)" href="/users/1"class="edit btn btn-success btn-sm">Edit</a> <a href="javascript:void(0)" href="{{route(users.deleate)}}" class="delete btn btn-danger btn-sm">Delete</a>';
+                    $actionBtn = '<a href="javascript:void(0)" href="{{route(users.deleate,$row.id)}}" class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
