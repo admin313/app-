@@ -13,6 +13,8 @@ class TagSeeder extends Seeder
      */
     public function run()
     {
-        //
+        User::factory()
+            ->count(50)
+            ->create();
     }
 }

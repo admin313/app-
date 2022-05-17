@@ -14,6 +14,6 @@ class Tag extends Model
         "active",
     ];
     public function Article(){
-        $this->hasMany(Article::class);
+        $this->belongsToMany(Article::class,'article_tag');
     }
 }

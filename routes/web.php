@@ -66,7 +66,7 @@ Route::prefix("users")->middleware('auth')->controller(UserController::class)->g
 });
 Route::get('profile/{user?}', \App\Http\Controllers\profileUser::class)->name('users.profile');
 Route::Resource('/category', CategoryController::class);
-Route::Resource('/article', ArticleController::class);
+Route::Resource('/articles', ArticleController::class);
 
 
 Route::middleware('auth')->get('/', function () {

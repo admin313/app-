@@ -15,10 +15,17 @@ class Article extends Model
         "image ",
         "description",
         "active",
+        "category_id",
+        "user_id",
     ];
-    public function tags(){
-        $this->hasMany(Tag::class);
+
+    public function tags()
+    {
+        $this->belongsToMany(Tag::class,'article_tag');
     }
-    public function categories(){
-        return $this->hasMany(Category::class);    }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
 }

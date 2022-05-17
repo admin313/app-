@@ -26,6 +26,12 @@ class DatabaseSeeder extends Seeder
                 'dob' => $faker->date($format = 'Y-m-d', $max = 'now')
             ]);
         }
+        \App\Models\User::factory(10)->create();
+        CategorySeeder::class;
+        TagSeeder::class;
+        ArticalSeeder::class;
+
+
         // \App\Models\User::factory(10)->create();
     }
 }

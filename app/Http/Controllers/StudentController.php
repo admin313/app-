@@ -96,25 +96,30 @@ class StudentController extends BaseController
         if ($request->ajax()) {
             $data = Student::latest()->get();
 //            return $data;
-            return Datatables::of($data)
+            return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $actionBtn = '<a href="' . route("students.edit", ['student' => $row->id]) . '"data-original-title="Detail" class="btn btn-primary mr-1 btn-sm detailProduct">ویرایش<span class="fas fa-eye"></span></a><a href="' . route("article.create", ['student' => $row->id]) . '"data-original-title="Detail" class="btn btn-primary mr-1 btn-sm saveArticle">ثبت مقاله<span class="fas fa-eye"></span></a> <a href="' . route("students.destory", ['student' => $row->id]) . '"data-original-title="Detail" class="btn btn-danger mr-1 btn-sm deleteStudent">حذف<span class="fas fa-eye"></span></a>';
+                    $actionBtn = '<button type="button" name="edit" id="'. $row->id .'" class="edit btn btn-primary btn-sm"> Edit</button>';
+                    $actionBtn .= '<button type="button" name="edit" id="'. $row->id .'" class="delete btn btn-danger btn-sm"> delete</button>';
+                    $actionBtn .= '<button type="button" name="add" id="'. $row->id .'" class="add btn btn-info btn-sm"> add </button>';
+                    return  $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
 //
 
                     //`<input href="javascript:void(0)" type="checkbox"  id="' + $row.id +'" onclick="editClick(this)">Edit</button>`;
 
-                    return $actionBtn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
+//                    return $actionBtn;
+//                })
+
         }
     }
 
-    public function delete(Student $student)
+    public function delete($id)
     {
-        $student->delete();
-        return response()->json(['success' => 'حذف با موققیت انجام شد!']);
+        Student::query()->findOrFail($id)->delete();
+        return redirect('Student');
 
     }
 }

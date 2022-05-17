@@ -16,9 +16,19 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->text('slug')->unique();
             $table->text('description');
             $table->string('image')->nullable();
-            $table->tinyInteger('active')->default(1);
+            $table->tinyInteger('active')
+                ->default(1);
+            $table->integer('category_id')
+                ->unsigned()->nullable();
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('cascade');
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
